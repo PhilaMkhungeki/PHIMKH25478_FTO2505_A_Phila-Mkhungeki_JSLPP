@@ -15,6 +15,7 @@
       href="./assets/favicon.svg"
     />
     <script defer src="./scripts/main.js" type="module"></script>
+    <script defer src="./scripts/featureScript.js" type="module"></script>
     <title>Kanban Task Management</title>
   </head>
 
@@ -29,6 +30,16 @@
         <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
         <button class="board-btn">Launch Career</button>
       </div>
+
+      <!--toggle dark or light theme-->
+      <div class="dark-light-theme" id="light-theme">
+        <img src="./assets/icon-light-theme.svg" alt="">
+      </div>
+      <div class="dark-light-theme" id="dark-theme">
+        <img src="./assets/icon-dark-theme.svg" alt="">
+      </div>
+      <!--Hide sidebar-->
+      <button class="hide-sidebar" id="hide-sideBar">Hide Sidebar</button>
     </nav>
 
     <!-- Main Layout: Header with board title, add task button, and main content area for task columns. -->
@@ -77,6 +88,10 @@
             </div>
             <!-- Tasks container for DONE -->
             <div class="tasks-container"></div>
+          </div>
+          <!--Show sidebar-->
+          <div class="show-sidebar" id="show-sidebar">
+            <img src="./assets/icon-show-sidebar.svg" alt="show-sidebar">
           </div>
           <!--Loading message for while tasks are still being fetched-->
           <div id="loading-message">Loading tasks...</div>
