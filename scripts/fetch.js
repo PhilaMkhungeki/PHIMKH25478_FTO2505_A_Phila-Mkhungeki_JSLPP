@@ -4,15 +4,16 @@ const API_URL = 'https://jsl-kanban-api.vercel.app/';
 
 export async function fetchTasksFromAPI() {
     try {
+        console.log("🌐 Fetching from API...");
         const response = await fetch(API_URL);
+        console.log("📦 Response status:", response.status);
         const tasks = await response.json();
-
+        console.log("📋 API returned:", tasks);
         if (!Array.isArray(tasks)){
             throw new Error("Invalid data format from API");
         }
-        //localStorage.setItem('tasks', JSON.stringify(tasks));       //save the tasks to local storage
         return tasks;
     } catch (error) {
-        console.log('Error fetching tasks:', error);
+        console.error('Error fetching tasks:', error);
     }
 }
