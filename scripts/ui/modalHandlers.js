@@ -28,6 +28,7 @@ export function setupNewTaskModalHandler() {
       form.reportValidity();
     }
   });
+  
 }
 
 export function openTaskModal(task) {
@@ -41,10 +42,10 @@ export function openTaskModal(task) {
 //edit task and display changes
 const editTask = document.getElementById("edit-task-btn");
 
-editTask.addEventListener('click', () => {
+editTask.addEventListener('click', (e) => {
   e.preventDefault();
 
-  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   const taskId = document.getElementById("task-modal").dataset.taskId;
 
   const updatedTasks = tasks.map(task => {
@@ -67,12 +68,12 @@ editTask.addEventListener('click', () => {
 //delete taks
 const deleteTask = document.getElementById("delete-task-btn");
 
-deleteTask.addEventListener('click', () => {
+deleteTask.addEventListener('click', (e) => {
   e.preventDefault();
 
   if(!confirm("Are you sure you want to delete this task?")) return;
 
-  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   const taskId = document.getElementById("task-modal").dataset.taskId;
 
   const updatedTasks = tasks.filter(task => task.id !== taskId);

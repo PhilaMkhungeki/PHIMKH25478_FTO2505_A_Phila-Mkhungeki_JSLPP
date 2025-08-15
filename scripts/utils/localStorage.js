@@ -7,7 +7,7 @@ import { fetchTasksFromAPI } from "../fetch.js";
  */
 export async function loadTasksFromStorage() {
 
-  const stored = localStorage.getItem("tasks");
+  const stored = localStorage.getItem("tasks") || [];
   if (stored) {
     try {
       return JSON.parse(stored);
