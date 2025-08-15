@@ -1,4 +1,5 @@
 import { addNewTask } from "../tasks/taskManager.js";
+import { renderTasks } from "./render.js";
 
 export function setupModalCloseHandler() {
   const modal = document.getElementById("task-modal");
@@ -36,3 +37,47 @@ export function openTaskModal(task) {
   document.getElementById("task-status").value = task.status;
   modal.showModal();
 }
+
+//edit task and display changes
+const editTask = document.getElementById("edit-task-btn");
+
+editTask.addEventListener('click', () => {
+  e.preventDefault();
+
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const taskId = document.getElementById("task-modal").dataset.taskId;
+
+  const updatedTasks = tasks.map(task => {
+    if (task.id === taskId) {
+      return {
+        ...task,
+        title: document.getElementById("task-title").value,
+        description: document.getElementById("task-desc").value,
+        status: document.getElementById("task-status").value
+      };
+    }
+    return task;
+  });
+
+  localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  renderTasks(updatedTasks);
+  document.getElementById("task-modal").close();
+});
+
+//delete taks
+const deleteTask = document.getElementById("delete-task-btn");
+
+deleteTask.addEventListener('click', () => {
+  e.preventDefault();
+
+  if(!confirm("Are you sure you want to delete this task?")) return;
+
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const taskId = document.getElementById("task-modal").dataset.taskId;
+
+  const updatedTasks = tasks.filter(task => task.id !== taskId);
+
+  localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  renderTasks(updatedTasks);
+  document.getElementById("task-modal").close();
+});
