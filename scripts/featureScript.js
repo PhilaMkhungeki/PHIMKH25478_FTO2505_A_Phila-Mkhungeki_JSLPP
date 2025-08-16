@@ -1,5 +1,3 @@
-import { createTaskElement } from "./ui/taskElement.js";
-
 //hide side bar
 const hide_sidebar = document.getElementById("hide-sideBar");
 const sidebar = document.getElementById("side-bar-div");

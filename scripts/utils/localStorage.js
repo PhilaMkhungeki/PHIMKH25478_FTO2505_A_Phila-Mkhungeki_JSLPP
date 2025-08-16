@@ -16,7 +16,7 @@ export async function loadTasksFromStorage() {
     }
   }
 
-  // If no tasks in storage, initialize with tasks from the API
+  // If no tasks in storage, initializes with tasks from the API
   try {
     const tasks = await fetchTasksFromAPI();
     if(tasks && Array.isArray(tasks)) {
@@ -27,7 +27,7 @@ export async function loadTasksFromStorage() {
     }
   } catch (error) {
     console.error("Error loading tasks from API:", error);
-    return []; //Empty array
+    return [];
   }
 }
 
