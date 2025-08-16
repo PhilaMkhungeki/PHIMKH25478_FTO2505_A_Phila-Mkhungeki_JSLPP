@@ -12,7 +12,7 @@ This project involves **deploying a Kanban app to Netlify**, ensuring the app's 
 
 ### Deployment & Hosting
 
--  I have deployed the Kanban app to Netlify, to access the app click on this link: philakanban-board.netlify.app.
+-  I have deployed the Kanban app to Netlify, to access the app click on this link: <a href="philakanban-board.netlify.app">philakanban-board.netlify.app</a>
 
 ### Initial Data Fetching & Loading State
 
