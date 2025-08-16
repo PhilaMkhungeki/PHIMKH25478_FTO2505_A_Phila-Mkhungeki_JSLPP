@@ -1,5 +1,5 @@
 import { addNewTask } from "../tasks/taskManager.js";
-import { renderTasks } from "./render.js";
+import { clearExistingTasks, renderTasks } from "./render.js";
 
 export function setupModalCloseHandler() {
   const modal = document.getElementById("task-modal");
@@ -28,11 +28,13 @@ export function setupNewTaskModalHandler() {
       form.reportValidity();
     }
   });
-  
 }
 
 export function openTaskModal(task) {
   const modal = document.getElementById("task-modal");
+
+  modal.dataset.taskId = String(task.id);
+
   document.getElementById("task-title").value = task.title;
   document.getElementById("task-desc").value = task.description;
   document.getElementById("task-status").value = task.status;
@@ -46,23 +48,29 @@ editTask.addEventListener('click', (e) => {
   e.preventDefault();
 
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  const taskId = document.getElementById("task-modal").dataset.taskId;
+  const modal = document.getElementById("task-modal");
+  const taskId = Number(modal.dataset.taskId);
 
-  const updatedTasks = tasks.map(task => {
-    if (task.id === taskId) {
-      return {
+  if (!Number.isFinite(taskId)) {
+    console.error("Missing/invalid task id on modal");
+    return;
+  }
+
+  const updatedTasks = tasks.map((task) => 
+    task.id === taskId
+    ? {
         ...task,
-        title: document.getElementById("task-title").value,
-        description: document.getElementById("task-desc").value,
+        title: document.getElementById("task-title").value.trim(),
+        description: document.getElementById("task-desc").value.trim(),
         status: document.getElementById("task-status").value
-      };
-    }
-    return task;
-  });
+      }
+      : task
+  );
 
   localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  clearExistingTasks();
   renderTasks(updatedTasks);
-  document.getElementById("task-modal").close();
+  modal.close();
 });
 
 //delete taks
@@ -73,12 +81,19 @@ deleteTask.addEventListener('click', (e) => {
 
   if(!confirm("Are you sure you want to delete this task?")) return;
 
+  const modal = document.getElementById("task-modal");
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  const taskId = document.getElementById("task-modal").dataset.taskId;
+  const taskId = Number(document.getElementById("task-modal").dataset.taskId);
 
-  const updatedTasks = tasks.filter(task => task.id !== taskId);
+  if (!Number.isFinite(taskId)) {
+    console.error("Missing/invalid task id on modal");
+    return;
+  }
+
+  const updatedTasks = tasks.filter((task) => task.id !== taskId);
 
   localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  clearExistingTasks();
   renderTasks(updatedTasks);
-  document.getElementById("task-modal").close();
+  modal.close();
 });
