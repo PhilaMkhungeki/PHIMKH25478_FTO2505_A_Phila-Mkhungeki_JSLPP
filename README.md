@@ -8,6 +8,9 @@ This project involves **deploying a Kanban app to Netlify**, ensuring the app's 
 
 **Check out the [Figma Reference File](https://www.figma.com/design/y7bFCUYL5ZHfPeojACBXg2/Challenges-%7C-JSL?node-id=6033-11092&t=XbQhBWPYxXDAqp3x-1)
 
+## Presentation Link
+- https://www.loom.com/share/34cc767aa2fd475e93d3e35a4a6df14a?sid=dca3fd4c-d897-4438-b832-6acaa24be79e
+
 ## Key Objectives
 
 ### Deployment & Hosting
