@@ -18,7 +18,6 @@ async function initTaskBoard() {
   } catch (error) {
     loadingMessage.innerHTML = "<p style='color:red;'>Failed to load tasks. Please try again later.</p>";
   }
-  //clearExistingTasks();
   setupModalCloseHandler();
   setupNewTaskModalHandler();
 }
